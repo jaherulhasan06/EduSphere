@@ -1,0 +1,6 @@
+{
+  "name": "EduSphere AI",
+  "description": "AI-powered school learning, live multiplayer quiz arena, performance analytics, and verified teacher community platform for Classes 1–12 across CBSE, SEBA, and ICSE.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

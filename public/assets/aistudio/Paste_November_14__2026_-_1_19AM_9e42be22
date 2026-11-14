@@ -1,0 +1,1507 @@
+# MASTER BUILD PROMPT — EDUSPHERE AI
+## AI-Powered School Learning & Teacher Community Platform
+
+**Role:** Act as a senior full-stack engineer, software architect, UI/UX designer and product engineer. Build a polished, responsive, functional web application suitable for a competitive product-building challenge.
+
+**Time constraint:** Approximately 90 minutes.
+
+**Primary objective:** Deliver a visually impressive, working MVP with real backend integration wherever possible. Prioritize a complete end-to-end user experience over a large number of unfinished features.
+
+---
+
+# 1. PRODUCT VISION
+
+Build **EduSphere AI**, an AI-powered educational platform for school students in Classes 1–12.
+
+EduSphere AI combines personalized learning, AI-assisted education, competitive multiplayer quizzes, gamification, student performance analytics and a community where verified teachers voluntarily help students.
+
+It should feel like a real educational technology product, not a generic dashboard template or a collection of disconnected demo pages.
+
+### Core product philosophy
+
+Students should be able to:
+
+- Learn difficult topics with an AI tutor.
+- Generate structured study notes.
+- Practice AI-generated quizzes.
+- Compete with other students in live multiplayer quizzes.
+- Ask questions and receive explanations from verified teachers.
+- Track their academic performance.
+- Earn XP and progress through levels.
+- Follow a personalized study plan.
+
+Teachers should be able to:
+
+- Register and submit qualification certificates.
+- Receive admin approval.
+- Answer student questions.
+- Upload educational explanations and resources.
+- Create quizzes.
+- Host live quiz competitions.
+- Publish study materials.
+
+Administrators should be able to:
+
+- Verify teachers.
+- Manage users.
+- Moderate questions and answers.
+- Review reported content.
+- Manage educational curriculum data.
+- Monitor platform activity.
+
+### Target audience
+
+- School students: Classes 1–12.
+- Teachers: School educators and qualified subject experts.
+- Administrators: Platform management team.
+
+### Supported curriculum
+
+Support multiple education boards through configurable data:
+
+- CBSE
+- SEBA / Assam State Board
+- ICSE
+- Other boards through an extensible structure.
+
+Do not hardcode the entire platform around one board.
+
+---
+
+# 2. NON-NEGOTIABLE DEVELOPMENT RULES
+
+1. Build the application, not just a design mockup.
+2. Do not stop after creating the landing page.
+3. Do not create buttons that look functional but do nothing.
+4. Do not use fake success messages for operations that were not completed.
+5. Use Supabase for real persistence, authentication and realtime features wherever credentials are available.
+6. Do not expose API keys or privileged credentials in frontend code.
+7. Use mock AI only because this MVP explicitly requires it.
+8. Keep the mock AI implementation replaceable by a real AI provider.
+9. Use demo mode only when necessary and label it clearly.
+10. Do not claim that mock functionality is connected to a real AI service.
+11. Use reusable components and feature-based architecture.
+12. Implement responsive desktop and mobile layouts.
+13. Preserve existing working project functionality if a starter project already exists.
+14. Do not waste time installing unnecessary libraries.
+15. Prioritize functional features and visual quality together.
+16. Test the main user journeys before finishing.
+17. Never invent external API credentials, database credentials or service connections.
+18. Do not introduce unnecessary microservices.
+
+**Execution priority:** A smaller number of genuinely working features is better than many incomplete features.
+
+---
+
+# 3. TECHNOLOGY STACK
+
+Use the following stack unless the existing environment imposes a necessary compatibility constraint.
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- Lucide React
+- Recharts
+- React Hook Form, if useful
+- Zod, if useful
+
+### Backend
+
+- Supabase Authentication
+- Supabase PostgreSQL
+- Supabase Realtime
+- Supabase Storage
+- Supabase Edge Functions where needed
+
+### AI
+
+- Mock AI provider.
+- Structured JSON responses.
+- Replaceable AI provider interface.
+
+### Deployment
+
+- Vercel-compatible frontend.
+- Supabase-hosted backend.
+
+Avoid unnecessary libraries. Use the simplest reliable solution that meets the requirements.
+
+---
+
+# 4. DESIGN SYSTEM AND VISUAL IDENTITY
+
+The platform must use a **premium + gamified hybrid design**.
+
+It should combine the professionalism of a modern SaaS dashboard with the engagement of a learning and gaming platform.
+
+### Visual direction
+
+- Modern, premium and clean.
+- Friendly enough for school students.
+- Professional enough for teachers and administrators.
+- Attractive typography.
+- Clear visual hierarchy.
+- Smooth micro-interactions.
+- Consistent spacing.
+- Well-designed empty states.
+- Subtle shadows and borders.
+- Rounded cards and buttons.
+- Consistent iconography.
+
+### Color system
+
+Use a cohesive indigo/purple primary palette.
+
+Suggested design tokens:
+
+- Primary: Indigo / deep purple.
+- Secondary: Violet.
+- Accent: Cyan.
+- Success: Emerald.
+- Warning: Amber.
+- Error: Rose.
+- Background: Neutral light and dark surfaces.
+
+Avoid excessive gradients. Use them selectively for hero sections, highlighted cards and important visual elements.
+
+### Theme support
+
+Implement:
+
+- Light theme.
+- Dark theme.
+- Theme toggle.
+- Persist the user's selected theme.
+- Use CSS variables or design tokens to avoid duplicated styles.
+
+### Responsive navigation
+
+Desktop:
+- Left sidebar.
+- Top navigation bar.
+- Main content area.
+
+Mobile:
+- Compact top header.
+- Bottom navigation for important destinations.
+- Responsive content cards.
+- Accessible menus and dialogs.
+
+### Design quality requirements
+
+Do not use:
+- Default unstyled HTML forms.
+- Random emoji as the primary icon system.
+- Excessively dense dashboards.
+- Oversized empty cards.
+- Inconsistent button styles.
+- Placeholder text as the main page content.
+- Fake charts with nonsensical data.
+
+Use Lucide icons consistently.
+
+Use realistic sample data where backend data is unavailable, but clearly distinguish sample data from real user activity.
+
+---
+
+# 5. APPLICATION ROUTES
+
+Implement role-aware routing.
+
+### Public routes
+
+- `/`
+- `/login`
+- `/register`
+- `/about`
+
+### Student routes
+
+- `/student/dashboard`
+- `/student/ai-tutor`
+- `/student/ai-notes`
+- `/student/quiz-arena`
+- `/student/live-quiz/:roomCode`
+- `/student/ask-teacher`
+- `/student/questions/:questionId`
+- `/student/performance`
+- `/student/study-planner`
+- `/student/leaderboard`
+- `/student/profile`
+
+### Teacher routes
+
+- `/teacher/dashboard`
+- `/teacher/verification`
+- `/teacher/questions`
+- `/teacher/questions/:questionId`
+- `/teacher/create-quiz`
+- `/teacher/host-quiz`
+- `/teacher/resources`
+- `/teacher/contributions`
+- `/teacher/profile`
+
+### Administrator routes
+
+- `/admin/dashboard`
+- `/admin/teacher-verification`
+- `/admin/users`
+- `/admin/moderation`
+- `/admin/curriculum`
+- `/admin/quizzes`
+- `/admin/settings`
+
+Protect role-specific routes. Redirect unauthorized users to the correct dashboard or an access-denied page.
+
+Do not rely on frontend route protection alone. Enforce authorization in the backend and database policies.
+
+---
+
+# 6. PUBLIC LANDING PAGE
+
+Create a visually impressive product-focused landing page.
+
+### Hero section
+
+Product name: EduSphere AI.
+
+Suggested headline:
+
+**Learn Smarter. Compete Better. Grow Together.**
+
+Suggested supporting text:
+
+"Your complete learning ecosystem. Learn with AI, compete with friends, get guidance from teachers and track your progress — all in one place."
+
+Primary CTA:
+- Start Learning
+
+Secondary CTA:
+- Explore Platform
+
+Include a polished visual representation of the actual student dashboard or a product preview. Do not use a generic unrelated stock illustration.
+
+### Landing page sections
+
+1. Hero section.
+2. Platform overview.
+3. AI-powered learning features.
+4. Live Quiz Arena preview.
+5. Teacher community section.
+6. Gamified learning section.
+7. Student performance analytics preview.
+8. How it works.
+9. Role-specific benefits.
+10. CTA section.
+11. Footer.
+
+Use clear feature cards and subtle animations.
+
+The landing page must be responsive and must lead users to registration or login.
+
+---
+
+# 7. AUTHENTICATION AND USER ONBOARDING
+
+Implement both real authentication and demo accounts.
+
+## Real authentication
+
+Use Supabase Auth.
+
+Support:
+- Email registration.
+- Email/password login.
+- Logout.
+- Session persistence.
+- Password reset if feasible.
+
+Do not store passwords yourself.
+
+## Demo authentication
+
+Provide a clearly labelled demo mode with preconfigured demonstration accounts:
+
+- Student Demo
+- Teacher Demo
+- Admin Demo
+
+Use these only in a safe development/demo environment.
+
+Never provide an unrestricted client-side mechanism that allows users to select an administrator role in production.
+
+If Supabase credentials are unavailable:
+
+- Enable a clearly labelled demo mode.
+- Use controlled demo identities.
+- Provide predictable sample data.
+- Keep the data-access architecture compatible with Supabase.
+- Do not pretend demo accounts are real authenticated accounts.
+
+## Student onboarding
+
+Collect only essential information:
+
+- Display name.
+- Class (1–12).
+- Education board.
+- Subjects.
+- Learning preferences, if needed.
+
+Avoid unnecessary personal information.
+
+## Teacher registration
+
+Collect:
+
+- Display name.
+- Email.
+- Subjects.
+- Teaching information.
+- Qualification details.
+- Certificate/document upload.
+
+New teachers must initially have `pending` verification status.
+
+Only administrators can approve or reject teacher verification.
+
+## Administrator provisioning
+
+Administrator privileges must be provisioned securely through trusted server-side configuration or database administration.
+
+Do not allow public registration to create administrator accounts.
+
+---
+
+# 8. STUDENT DASHBOARD
+
+The student dashboard is the primary application screen.
+
+Create a personalized and visually impressive dashboard.
+
+### Header
+
+Show:
+- Student display name.
+- Class and board.
+- Notification indicator.
+- Theme toggle.
+- Profile menu.
+
+### Dashboard content
+
+Include:
+
+1. Welcome section.
+2. Daily learning progress.
+3. XP and current level.
+4. Current leaderboard position.
+5. Continue learning.
+6. Recommended topics.
+7. Upcoming study tasks.
+8. Upcoming live quizzes.
+9. Subject performance.
+10. Recent quiz results.
+
+### Personalization
+
+Use:
+
+- Class.
+- Board.
+- Subjects.
+- Quiz results.
+- Weak topics.
+
+Do not display recommendations as genuinely personalized if they are only static demonstration data. Label them appropriately.
+
+---
+
+# 9. AI LEARNING TUTOR
+
+Create an interactive AI tutor interface.
+
+### Features
+
+- Chat-style interface.
+- Subject selector.
+- Class selector.
+- Topic input.
+- User message input.
+- AI response display.
+- Conversation history for the current session.
+- Loading state.
+- Error state.
+- Suggested questions.
+
+### Educational response format
+
+Responses should be appropriate for the selected class level.
+
+Where suitable, structure explanations as:
+
+1. Simple explanation.
+2. Step-by-step breakdown.
+3. Example.
+4. Important points.
+5. Follow-up practice question.
+
+### Mock AI architecture
+
+Create a replaceable interface such as:
+
+`AIProvider`
+
+Implement:
+
+`MockAIProvider`
+
+Possible future implementation:
+
+`GeminiAIProvider`
+
+The UI must not depend directly on a particular provider.
+
+The mock provider should:
+- Generate useful topic-related responses.
+- Use class and subject context.
+- Provide consistent response structures.
+- Handle empty inputs.
+- Handle unsupported topics gracefully.
+- Clearly identify itself as demonstration AI.
+
+Do not merely return the same hardcoded sentence for every question.
+
+The UI should display a clear notice:
+
+"Demo AI mode — responses are generated by a demonstration provider."
+
+Do not claim that this feature is connected to Gemini or another real AI service.
+
+---
+
+# 10. AI NOTES GENERATOR
+
+Create a polished notes-generation interface.
+
+### Inputs
+
+- Class.
+- Education board.
+- Subject.
+- Chapter or topic.
+- Notes format, if useful.
+
+### Generated output
+
+- Topic title.
+- Short summary.
+- Important definitions.
+- Main concepts.
+- Key points.
+- Examples.
+- Revision section.
+- Practice questions.
+
+Allow students to:
+- Generate notes.
+- View notes.
+- Save notes.
+- Reopen saved notes.
+- Copy notes.
+- Delete their own saved notes.
+
+Use the mock AI provider and make the output structured.
+
+Do not present generated material as an official textbook or verified board syllabus.
+
+---
+
+# 11. AI QUIZ GENERATOR AND PRACTICE QUIZZES
+
+Create an interactive quiz experience.
+
+### Quiz configuration
+
+- Class.
+- Board.
+- Subject.
+- Topic.
+- Difficulty.
+- Number of questions.
+
+### Question formats
+
+- Multiple-choice questions.
+- True/false questions, if appropriate.
+
+### Quiz interface
+
+- Question counter.
+- Progress indicator.
+- Answer options.
+- Next and previous controls, where appropriate.
+- Timer for timed quizzes.
+- Submit confirmation.
+- Results screen.
+
+### Results screen
+
+Show:
+- Score.
+- Correct answers.
+- Incorrect answers.
+- Percentage.
+- Explanations.
+- Suggested revision topics.
+
+### Important requirements
+
+- Prevent duplicate submissions.
+- Validate the answer count.
+- Do not reveal correct answers before submission.
+- Calculate scores consistently.
+- Save quiz attempts for authenticated students.
+
+Use structured quiz objects rather than parsing arbitrary text.
+
+---
+
+# 12. LIVE QUIZ ARENA — REALTIME FEATURE
+
+This is a major differentiator.
+
+Implement actual room creation and joining using Supabase Realtime when configured.
+
+Both students and verified teachers must be able to host rooms.
+
+### Room creation
+
+Allow a host to:
+
+- Create a room.
+- Select a quiz.
+- Set the room name.
+- Configure question count and duration.
+- Generate a unique room code.
+- View participants.
+- Start the quiz.
+
+### Room joining
+
+Students should be able to:
+
+- Enter a room code.
+- Join an available room.
+- View participants.
+- Wait for the host to start.
+
+### Live quiz experience
+
+Show:
+
+- Room code.
+- Host information.
+- Participant list.
+- Current question.
+- Answer options.
+- Countdown.
+- Submission confirmation.
+- Live leaderboard.
+
+### Realtime events
+
+Use Supabase Realtime to communicate room updates, including:
+
+- Participant joined.
+- Quiz started.
+- Question changed.
+- Answer submitted.
+- Leaderboard updated.
+- Quiz finished.
+
+### Scoring
+
+Validate correct answers and calculate authoritative scores through trusted backend logic.
+
+Never trust a client-supplied score or client-supplied correctness result.
+
+Prevent:
+- Duplicate submissions.
+- Late answers.
+- Unauthorized room access.
+- Unauthorized room control.
+
+### Room status
+
+Use clear room states:
+
+- Waiting.
+- Active.
+- Finished.
+- Cancelled.
+
+### Final results
+
+Display:
+- Final rank.
+- Participant scores.
+- Correct answers.
+- XP earned.
+- Quiz summary.
+
+If Supabase configuration is unavailable, provide a clearly labelled demo room experience. Do not describe simulated synchronization as actual realtime multiplayer.
+
+---
+
+# 13. ASK A TEACHER — COMMUNITY FEATURE
+
+Create a student-teacher question-answer community.
+
+### Student functionality
+
+Students can:
+
+- Create a public question.
+- Select class.
+- Select board.
+- Select subject.
+- Add a title.
+- Add a detailed description.
+- Browse existing questions.
+- Filter by subject and class.
+- View teacher answers.
+- Mark an answer helpful.
+- Report inappropriate content.
+
+### Optional private follow-up
+
+Allow a student to initiate a private educational follow-up on a public question.
+
+This must be an in-platform, permission-controlled discussion.
+
+Only the student, the assigned/participating teacher and authorized moderation personnel should have access.
+
+Do not expose private follow-up content publicly.
+
+Do not implement unrestricted private messaging between students and teachers.
+
+### Teacher functionality
+
+Verified teachers can:
+
+- Browse unanswered questions.
+- Filter questions.
+- Open question details.
+- Write detailed explanations.
+- Attach educational resources.
+- Edit their own answers, where appropriate.
+
+### Question states
+
+- Open.
+- Answered.
+- Closed.
+- Reported.
+
+### Teacher verification restriction
+
+Pending and rejected teachers cannot answer official student questions or host official teacher competitions.
+
+Show clear verification status in the teacher dashboard.
+
+### Moderation
+
+Provide report controls and admin moderation tools.
+
+Use appropriate content safeguards for a school audience.
+
+---
+
+# 14. TEACHER DASHBOARD
+
+Create a separate teacher experience.
+
+### Dashboard content
+
+- Verification status.
+- Questions awaiting answers.
+- Questions answered.
+- Created quizzes.
+- Hosted competitions.
+- Published study materials.
+- Contribution statistics.
+
+### Teacher navigation
+
+- Dashboard.
+- Student Questions.
+- Create Quiz.
+- Host Live Quiz.
+- Study Materials.
+- Contributions.
+- Profile.
+
+### Certificate upload
+
+Use Supabase Storage private buckets.
+
+Only authorized administrators should be able to access verification documents.
+
+Teachers should be able to view their own application status.
+
+---
+
+# 15. ADMIN DASHBOARD
+
+Create a separate administration interface.
+
+### Dashboard statistics
+
+- Total students.
+- Total teachers.
+- Pending verification requests.
+- Approved teachers.
+- Total questions.
+- Reported content.
+- Active quiz rooms.
+
+### Teacher verification
+
+Display:
+
+- Teacher name.
+- Qualification details.
+- Submitted document.
+- Application date.
+- Current status.
+
+Actions:
+- Approve.
+- Reject.
+- Request resubmission, if feasible.
+
+Every status change should be persisted and attributable to the administrator.
+
+### User management
+
+- View users.
+- Filter by role.
+- View account status.
+- Suspend or deactivate accounts, if implemented.
+- Do not expose sensitive authentication data.
+
+### Content moderation
+
+- View reported questions.
+- View reported answers.
+- Review reports.
+- Remove inappropriate public content.
+- Record moderation actions.
+
+### Curriculum management
+
+Support configurable:
+
+- Boards.
+- Classes.
+- Subjects.
+- Chapters.
+
+Do not attempt to manually populate every curriculum and textbook within the 90-minute MVP.
+
+---
+
+# 16. GAMIFICATION SYSTEM
+
+Implement a basic but real gamification system.
+
+### Core elements
+
+- XP points.
+- Levels.
+- Leaderboards.
+
+### Example XP rules
+
+Use transparent, configurable rules such as:
+
+- Completing a practice quiz: XP.
+- Completing a study task: XP.
+- Participating in a live quiz: XP.
+- Correct live quiz answers: XP.
+- Consistent learning activity: optional bonus.
+
+Do not award XP for arbitrary repeated actions.
+
+Prevent duplicate XP awards for the same completed activity.
+
+### Levels
+
+Create a simple configurable XP threshold system.
+
+### Leaderboards
+
+Provide:
+
+- Global leaderboard.
+- Class leaderboard, where practical.
+
+Use display names and avoid exposing personal information.
+
+Clearly distinguish demonstration leaderboard data from real platform data.
+
+---
+
+# 17. PERFORMANCE ANALYTICS
+
+Create a student performance dashboard.
+
+### Analytics
+
+- Overall quiz performance.
+- Subject-wise scores.
+- Quiz history.
+- Strong topics.
+- Weak topics.
+- Learning activity.
+- XP progression.
+
+### Visualizations
+
+Use Recharts for:
+
+- Performance line chart.
+- Subject comparison chart.
+- Quiz score history.
+- Progress summaries.
+
+### Personalization
+
+Use actual saved quiz results when available.
+
+Identify weak topics using a simple, explainable rule, such as repeated low scores across attempts.
+
+Do not claim to use advanced machine learning.
+
+---
+
+# 18. STUDY PLANNER
+
+Create a functional study planner.
+
+### Features
+
+- Add study tasks.
+- Select subject.
+- Enter topic.
+- Set due date.
+- Mark tasks complete.
+- View daily and weekly tasks.
+- Delete or edit personal tasks.
+
+### Recommendations
+
+Suggest revision tasks for weak topics when relevant performance data exists.
+
+Do not create a complex AI scheduling engine for the MVP.
+
+---
+
+# 19. DATABASE DESIGN
+
+Use Supabase PostgreSQL.
+
+Create only the essential tables required for the implemented features. Prefer clear foreign keys, timestamps, constraints and indexes.
+
+Suggested schema:
+
+### Identity and curriculum
+
+`profiles`
+- id
+- display_name
+- role
+- created_at
+
+`student_profiles`
+- user_id
+- class_id
+- board_id
+- subjects
+
+`teacher_profiles`
+- user_id
+- qualifications
+- subjects
+- verification_status
+- created_at
+
+`teacher_documents`
+- id
+- teacher_id
+- storage_path
+- document_type
+- created_at
+
+`boards`
+- id
+- name
+
+`classes`
+- id
+- class_number
+
+`subjects`
+- id
+- board_id
+- class_id
+- name
+
+### Community
+
+`questions`
+- id
+- student_id
+- title
+- description
+- class_id
+- board_id
+- subject_id
+- status
+- created_at
+
+`answers`
+- id
+- question_id
+- teacher_id
+- content
+- created_at
+
+`followups`
+- id
+- question_id
+- student_id
+- teacher_id
+- content
+- created_at
+
+`content_reports`
+- id
+- reporter_id
+- target_type
+- target_id
+- reason
+- status
+- created_at
+
+### Learning
+
+`generated_notes`
+- id
+- student_id
+- title
+- subject_id
+- content
+- created_at
+
+`generated_quizzes`
+- id
+- creator_id
+- title
+- subject_id
+- questions
+- created_at
+
+`quiz_attempts`
+- id
+- student_id
+- quiz_id
+- score
+- total_questions
+- answers
+- created_at
+
+`study_tasks`
+- id
+- student_id
+- title
+- subject_id
+- due_date
+- completed
+- created_at
+
+### Gamification
+
+`xp_transactions`
+- id
+- user_id
+- activity_type
+- reference_id
+- points
+- created_at
+
+`user_badges`
+- id
+- user_id
+- badge_id
+- created_at
+
+### Live quizzes
+
+`quiz_rooms`
+- id
+- room_code
+- host_id
+- quiz_id
+- status
+- current_question_index
+- created_at
+
+`room_participants`
+- id
+- room_id
+- student_id
+- score
+- joined_at
+
+`live_answers`
+- id
+- room_id
+- participant_id
+- question_index
+- selected_answer
+- submitted_at
+
+Use appropriate unique constraints to prevent duplicate room participation and duplicate answer submissions.
+
+You may simplify or combine tables when it makes the MVP safer and faster, but preserve the data model's logical separation.
+
+---
+
+# 20. DATABASE SECURITY AND AUTHORIZATION
+
+Security must be enforced at the database and server layers.
+
+Implement Row Level Security policies.
+
+### Essential access rules
+
+**Profiles**
+- Users can read appropriate profile information.
+- Users can update their own permitted profile fields.
+- Users cannot grant themselves privileged roles.
+
+**Student records**
+- Students can access and update their own learning records.
+- Students cannot read other students' private data.
+
+**Teacher records**
+- Teachers can access their own verification status.
+- Only authorized administrators can review teacher certificates.
+- Only approved teachers can publish official answers and host official teacher quizzes.
+
+**Questions and answers**
+- Public questions can be viewed according to their visibility.
+- Students can create and manage their own questions.
+- Teachers can answer only when verified.
+- Private follow-ups must have strict participant-based access.
+
+**Live quizzes**
+- Participants can read the room data needed for the session.
+- Only authorized hosts can control the room.
+- Only participants can submit their own answers.
+- Scores must be calculated by trusted backend logic.
+
+**Admin operations**
+- Only administrators can approve teachers, moderate content and perform administrative actions.
+
+Do not use a client-controlled role field as the sole security mechanism.
+
+Never expose the Supabase service-role key to the frontend.
+
+---
+
+# 21. ARCHITECTURE AND CODE ORGANIZATION
+
+Use a feature-based modular monolith.
+
+Suggested project structure:
+
+```text
+src/
+├── app/
+│   ├── App.tsx
+│   ├── router.tsx
+│   ├── providers.tsx
+│   └── layouts/
+│       ├── StudentLayout.tsx
+│       ├── TeacherLayout.tsx
+│       └── AdminLayout.tsx
+│
+├── components/
+│   ├── ui/
+│   ├── navigation/
+│   ├── charts/
+│   └── shared/
+│
+├── features/
+│   ├── authentication/
+│   ├── dashboard/
+│   ├── ai-tutor/
+│   ├── ai-notes/
+│   ├── quizzes/
+│   ├── live-quiz/
+│   ├── teacher-community/
+│   ├── teacher-verification/
+│   ├── gamification/
+│   ├── analytics/
+│   ├── study-planner/
+│   └── administration/
+│
+├── services/
+│   ├── supabase.ts
+│   ├── ai/
+│   │   ├── AIProvider.ts
+│   │   └── MockAIProvider.ts
+│   ├── auth.service.ts
+│   ├── quiz.service.ts
+│   ├── live-quiz.service.ts
+│   └── question.service.ts
+│
+├── hooks/
+├── contexts/
+├── types/
+├── utils/
+├── constants/
+└── styles/
+```
+
+Keep components reusable.
+
+Separate:
+- UI components.
+- Business logic.
+- Data-access logic.
+- Type definitions.
+- Authentication.
+- Realtime subscriptions.
+
+Avoid giant components and duplicated business logic.
+
+---
+
+# 22. ENVIRONMENT CONFIGURATION
+
+Create `.env.example`.
+
+Suggested variables:
+
+```env
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+
+VITE_DEMO_MODE=true
+VITE_AI_PROVIDER=mock
+```
+
+Use only public Supabase configuration in frontend variables.
+
+If server-side secrets are required, store them in Supabase Edge Function secrets or another secure backend environment.
+
+Never commit actual credentials.
+
+### Configuration behavior
+
+If valid Supabase configuration exists:
+- Connect to Supabase.
+- Use real authentication.
+- Persist application data.
+- Use Realtime.
+- Use private storage for teacher documents.
+
+If Supabase configuration is missing:
+- Start a clearly labelled demo mode.
+- Use controlled demonstration data.
+- Provide functional UI interactions.
+- Keep provider interfaces compatible with future Supabase integration.
+
+Do not silently switch between real and fake modes.
+
+Display the current environment clearly in development/demo builds.
+
+---
+
+# 23. ERROR HANDLING AND UX STATES
+
+Every important feature must have:
+
+- Loading state.
+- Empty state.
+- Error state.
+- Success state.
+- Disabled state when appropriate.
+
+Examples:
+
+- No questions available.
+- No live rooms found.
+- Teacher verification pending.
+- Quiz generation in progress.
+- Failed room connection.
+- No quiz history.
+- No study tasks.
+- Authentication error.
+
+Use toast notifications for important feedback.
+
+Use confirmation dialogs for destructive operations.
+
+Do not display a success notification before a backend operation succeeds.
+
+---
+
+# 24. IMPLEMENTATION PLAN — 90 MINUTES
+
+Follow this order.
+
+## Phase 1 — Foundation (0–10 minutes)
+
+- Inspect the existing environment.
+- Set up React, TypeScript and Vite if needed.
+- Install only essential dependencies.
+- Configure Tailwind.
+- Configure routing.
+- Configure the theme system.
+- Create the Supabase client.
+- Create the common layout and design system.
+
+Deliverable: Working application shell.
+
+## Phase 2 — Landing and authentication (10–20 minutes)
+
+- Build the landing page.
+- Create login and registration.
+- Implement demo account access.
+- Connect real Supabase authentication if configured.
+- Create role-based layouts.
+
+Deliverable: User can enter the correct role experience.
+
+## Phase 3 — Student dashboard and AI (20–38 minutes)
+
+- Build student dashboard.
+- Implement AI tutor with mock provider.
+- Implement AI notes generation.
+- Save notes when backend is available.
+
+Deliverable: Working student learning experience.
+
+## Phase 4 — Quiz system (38–52 minutes)
+
+- Build quiz generation.
+- Implement quiz attempt interface.
+- Calculate results.
+- Save attempts.
+- Display explanations.
+
+Deliverable: Complete practice quiz workflow.
+
+## Phase 5 — Live Quiz Arena (52–68 minutes)
+
+- Create rooms.
+- Generate room codes.
+- Join rooms.
+- Implement room state.
+- Subscribe to Supabase Realtime.
+- Submit answers.
+- Calculate scores securely.
+- Display leaderboard.
+
+Deliverable: Working multiplayer quiz workflow where backend credentials are available; clearly labelled demo alternative otherwise.
+
+## Phase 6 — Teacher community (68–78 minutes)
+
+- Create student question posting.
+- Build question listing.
+- Implement teacher answers.
+- Add verification status.
+- Add private follow-up if feasible.
+
+Deliverable: Functional student-teacher workflow.
+
+## Phase 7 — Gamification and analytics (78–85 minutes)
+
+- Award XP for valid completed activities.
+- Display levels.
+- Show leaderboard.
+- Build basic performance charts.
+- Display weak topics based on available attempts.
+
+Deliverable: Basic progress and engagement system.
+
+## Phase 8 — Testing and deployment (85–90 minutes)
+
+- Check navigation.
+- Test student experience.
+- Test teacher experience.
+- Test admin access.
+- Test quiz submission.
+- Test room joining.
+- Check responsive layouts.
+- Fix blocking errors.
+- Prepare deployment.
+
+Deliverable: A working, presentable competition MVP.
+
+If a phase takes longer than expected, simplify secondary functionality rather than abandoning the complete student journey.
+
+---
+
+# 25. MVP FEATURE PRIORITY
+
+### P0 — Must work
+
+1. Landing page.
+2. Role-based authentication and demo access.
+3. Student dashboard.
+4. AI tutor using the mock provider.
+5. AI quiz generation and attempt flow.
+6. Student question posting.
+7. Teacher answer workflow.
+8. Live room creation and joining.
+9. Basic XP and leaderboard.
+10. Responsive design.
+
+### P1 — Implement if time allows
+
+1. AI notes saving.
+2. Teacher certificate submission.
+3. Admin teacher approval.
+4. Private question follow-up.
+5. Study planner.
+6. Performance analytics.
+7. Teacher-created quizzes.
+8. Admin content moderation.
+
+### P2 — Future enhancements
+
+1. Real AI provider integration.
+2. Advanced adaptive learning.
+3. Complete curriculum mapping.
+4. Live classes.
+5. Advanced notifications.
+6. More gamification and badges.
+7. Parent/guardian features.
+8. Advanced analytics and recommendations.
+9. Rich media learning resources.
+
+Do not claim P1 or P2 functionality is complete if it is only represented by static screens.
+
+---
+
+# 26. TESTING AND ACCEPTANCE CRITERIA
+
+Before finishing, verify the following.
+
+### Landing page
+- Loads correctly.
+- Navigation works.
+- Registration and login CTAs work.
+- Mobile layout is usable.
+
+### Authentication
+- Real login works when Supabase is configured.
+- Demo accounts work in demo mode.
+- Role-specific dashboards open correctly.
+- Logout works.
+- Unauthorized role access is blocked.
+
+### Student
+- Dashboard loads.
+- AI tutor accepts input and returns a structured response.
+- AI notes can be generated and saved where persistence is available.
+- Quizzes can be attempted and scored.
+- Student questions can be posted.
+- Performance data is displayed correctly.
+
+### Teacher
+- Teacher can register.
+- Teacher can submit verification information.
+- Pending teachers cannot perform verified-only actions.
+- Approved teachers can answer questions.
+- Teachers can create or host quizzes where implemented.
+
+### Admin
+- Admin can review teacher applications.
+- Approval and rejection persist.
+- Moderation actions work.
+- Unauthorized users cannot access admin functions.
+
+### Live quizzes
+- Room creation works.
+- Room joining works.
+- Participant list updates.
+- Quiz state changes.
+- Answers are recorded.
+- Scores are calculated correctly.
+- Final leaderboard is displayed.
+
+### General
+- No broken navigation.
+- No major console errors.
+- No exposed secrets.
+- Responsive layouts work.
+- Loading and empty states exist.
+- No false success messages.
+- Demo functionality is clearly labelled.
+
+---
+
+# 27. FINAL CODING AGENT EXECUTION INSTRUCTIONS
+
+Follow these instructions strictly:
+
+1. First inspect the existing project files and runtime environment.
+2. Identify what is already configured.
+3. Reuse existing working code where appropriate.
+4. Do not restart or replace the project unnecessarily.
+5. Create a short implementation plan internally.
+6. Start building immediately.
+7. Prioritize the highest-value end-to-end features.
+8. Keep the application visually consistent.
+9. Use real Supabase services wherever valid configuration exists.
+10. Use mock AI with a clean provider abstraction.
+11. Provide demo mode only where real credentials or services are unavailable.
+12. Never expose secret keys.
+13. Keep the application runnable throughout development.
+14. Fix build and runtime errors before finishing.
+15. Do not stop to ask unnecessary questions; make reasonable implementation decisions based on this specification.
+16. Do not spend the entire time explaining architecture or producing documentation instead of coding.
+17. Do not claim unimplemented features are working.
+18. At the end, provide a concise implementation report.
+
+### Final implementation report
+
+Include:
+
+- Features implemented.
+- Features partially implemented.
+- Features using demo data.
+- Features connected to Supabase.
+- Features requiring credentials.
+- Database setup and migration instructions.
+- Environment variables required.
+- How to run the application.
+- How to deploy it.
+- Known limitations.
+
+**FINAL GOAL:**
+
+Deliver a visually impressive, professional, responsive and functional EduSphere AI MVP that demonstrates how AI-powered learning, teacher collaboration, real-time competition and gamification can work together in one school education platform.
+
+Build the product. Do not merely describe it.
